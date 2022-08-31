@@ -5,6 +5,9 @@
   "repository": "https://github.com/Jardel-Kenzie/m2-api-empresas.git",
   "author": "Raphael <raphael@kenzie.com.br>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec sucrase-node ./src/index.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.18.1",
