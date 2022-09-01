@@ -67,8 +67,8 @@ class Department extends Model {
     }
 
     static associate(models) {
-        this.belongsToMany(models.Company, { foreignKey: "company_uuid", as: "companies" })
-        this.belongsToMany(models.User, { foreignKey: "user_uuid", as: "user" })
+        this.belongsTo(models.Company, { foreignKey: "company_uuid", as: "companies" })
+        this.hasOne(models.User, { foreignKey: "manager_uuid", as: "user" })
     }
 }
 

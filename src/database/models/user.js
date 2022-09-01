@@ -87,8 +87,8 @@ class User extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Company, { foreignKey: "company_uuid", as: "company" })
-        this.belongsToMany(models.Department, { foreignKey: "department_uuid", as: "department" })
+        this.belongsTo(models.UserDepartment, { foreignKey: "department_uuid", as: "user_department" })
+        this.belongsTo(models.User, { foreignKey: "manager_uuid", as: "department" })
     }
 }
 

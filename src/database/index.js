@@ -20,4 +20,11 @@ Department.init(database)
 Company.init(database)
 UserDepartment.init(database)
 
+User.associate(database.models)
+Group.associate(database.models)
+Sector.associate(database.models)
+Department.associate(database.models)
+Company.associate(database.models)
+UserDepartment.associate(database.models)
+
 export default database
