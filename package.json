@@ -2,11 +2,13 @@
   "name": "m2-api-empresas",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/Jardel-Kenzie/m2-api-empresas.git",
   "author": "Raphael <raphael@kenzie.com.br>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec sucrase-node ./src/index.js"
+    "start": "nodemon --exec sucrase-node ./src/index.js",
+    "seed": "node src/database/seed/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
