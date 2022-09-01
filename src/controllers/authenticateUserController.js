@@ -23,7 +23,7 @@ export default class AuthenticateUser{
             const matchPassword = await compare(password, userAlreadExist.password)
 
             if(!matchPassword){
-                return response.status(401).json({error: "password invalid"})
+                return response.status(401).json({error: "password invalid!"})
             }
 
             const token = sign({uuid: userAlreadExist.uuid}, "kenzie", {
@@ -32,8 +32,7 @@ export default class AuthenticateUser{
             })
         
             return response.status(200).json({
-                token,
-                uuid: userAlreadExist.uuid
+                token
             })
 
         }catch({errors}){

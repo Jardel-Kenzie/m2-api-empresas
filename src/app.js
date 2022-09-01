@@ -2,6 +2,7 @@ import cors from "cors"
 import express from "express"
 import database from "./database/index.js"
 import User from "./database/models/user.js"
+import authToken from "./middlewares/authToken.js"
 
 import authRouter from "./routes/auth.js"
 import Helper from "./services/helper.js"
@@ -15,7 +16,7 @@ app.use(express.json())
 
 app.use("/auth", Helper.valideBody,authRouter)
 
-app.use("/test", async (req, resp) => {
+app.use("/test", Helper.valideBody, authToken.isAdmin, async (req, resp) => {
         const users = await User.findAll()
 
         return resp.json(users)
