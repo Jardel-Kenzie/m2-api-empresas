@@ -11,14 +11,15 @@ class Sector extends Model {
             },
             description: {
                 type: Sequelize.STRING,
-                allowNull: {
-                    msg: "required field professional_level!"
-                },
+                allowNull: false,
                 validate: {
                     customValidate(value){
                         if(!["Alimenticio","Varejo","Textil","Manufatura","Aeroespacial", "Automotiva", "TI", "Atacado"].includes(value)){
                             throw new Error("description must be one of these: Alimenticio, Varejo, Textil, Manufatura, Aeroespacial, Automotiva, TI, Atacado")
                         }
+                    },
+                    notNull: {
+                        msg: "description is required!"
                     }
                 }
             }

@@ -28,9 +28,7 @@ app.use((error, request, response, next) => {
     response.header("Access-Control-Allow-Origin", "*");
     return response.json({
         status: "Error",
-        error: {
-            message: error.message
-        },  
+        error:  error.msg,  
     })
 })
 
