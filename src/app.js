@@ -6,6 +6,7 @@ import authToken from "./middlewares/authToken.js"
 
 import authRouter from "./routes/auth.js"
 import companiesRouter from "./routes/companies.js"
+import usersRouter from "./routes/user.js"
 import Helper from "./services/helper.js"
 
 const app = express()
@@ -17,6 +18,7 @@ app.use(express.json())
 
 app.use("/auth", Helper.valideBody,authRouter)
 app.use("/companies", Helper.valideBody, companiesRouter)
+app.use("/users", Helper.valideBody, usersRouter)
 
 app.use("/test", Helper.valideBody, authToken.isAdmin, async (req, resp) => {
         const users = await User.findAll()
