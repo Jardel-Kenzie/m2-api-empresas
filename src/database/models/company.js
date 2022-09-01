@@ -11,26 +11,61 @@ class Company extends Model {
                 },
                 name: {
                     type: Sequelize.STRING,
-                    allowNull: false
+                    allowNull: {
+                        msg: "required field name!"
+                    },
+                    validate: {
+                        notEmpty: {
+                            msg: "name not empty!"
+                        }
+                    }
                 },
                 opening_hours: {
                     type: Sequelize.TIME,
-                    allowNull: false
+                    allowNull: {
+                        msg: "required field opening_hours!"
+                    },
+                    validate: {
+                        notEmpty: {
+                            msg: "opening_hours not empty!"
+                        }
+                    }
                 },
                 branch_activity: {
                     type: Sequelize.TIME,
-                    allowNull: false
+                    allowNull: {
+                        msg: "required field branch_activity!"
+                    },
+                    validate: {
+                        notEmpty: {
+                            msg: "branch_activity not empty!"
+                        },
+                    }
                 },
                 sector_uuid: {
                     type: Sequelize.UUID,
-                    allowNull: false,
+                    allowNull: {
+                        msg: "required field sector_uuid!"
+                    },
+                    validate: {
+                        notEmpty: {
+                            msg: "sector_uuid not empty!"
+                        },
+                    },
                     references: { model: "sectors", key: "uuid"},
                     onUpdate: "CASCADE",
                     onDelete: "CASCADE"
                 },
                 group_uuid: {
                     type: Sequelize.UUID,
-                    allowNull: false,
+                    allowNull: {
+                        msg: "required field group_uuid!"
+                    },
+                    validate: {
+                        notEmpty: {
+                            msg: "group_uuid not empty!"
+                        },
+                    },
                     references: { model: "groups", key: "uuid"},
                     onUpdate: "CASCADE",
                     onDelete: "CASCADE"

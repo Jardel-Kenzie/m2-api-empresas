@@ -17,8 +17,7 @@ export default class CreateUsers{
                 email,
                 password: passwordHashCode,
                 professional_level,
-                kind_of_work,
-                is_admin: false
+                kind_of_work
             })
         
             return response.status(201).json(newUser)

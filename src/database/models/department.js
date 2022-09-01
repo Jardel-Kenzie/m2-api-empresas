@@ -11,26 +11,50 @@ class Department extends Model {
             },
             name: {
                 type: Sequelize.STRING,
-                allowNull: false
+                allowNull: {
+                    msg: "required field name!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "name not empty!"
+                    }
+                }
             },
             description: {
                 type: Sequelize.STRING,
-                allowNull: false
-            },
-            is_admin: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false
+                allowNull: {
+                    msg: "required field description!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "description not empty!"
+                    }
+                }
             },
             company_uuid: {
                 type: Sequelize.UUID,
-                allowNull: false,
+                allowNull: {
+                    msg: "required field company_uuid!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "company_uuid not empty!"
+                    },
+                },
                 references: { model: "companies", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
             },
             manager_uuid: {
                 type: Sequelize.UUID,
-                allowNull: false,
+                allowNull: {
+                    msg: "required field manager_uuid!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "manager_uuid not empty!"
+                    },
+                },
                 references: { model: "users", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"

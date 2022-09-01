@@ -11,14 +11,28 @@ class UserDepartment extends Model {
             },
             user_uuid: {
                 type: Sequelize.UUID,
-                allowNull: false,
+                allowNull: {
+                    msg: "required field user_uuid!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "user_uuid not empty"
+                    }
+                },
                 references: { model: "users", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
             },
             department_uuid: {
                 type: Sequelize.UUID,
-                allowNull: false,
+                allowNull: {
+                    msg: "required field department_uuid!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "department_uuid not empty"
+                    }
+                },
                 references: { model: "departments", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"

@@ -11,7 +11,14 @@ class Group extends Model {
             },
             group_name: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: {
+                    msg: "required field group_name!"
+                },
+                validate: {
+                    notEmpty: {
+                        msg: "group_name not empty!"
+                    }
+                }
             }
         }, {
             timestamps: false,
