@@ -7,9 +7,7 @@ class User extends Model {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true,
-                allowNull: {
-                    msg: "required fiedl uuid"
-                }
+                allowNull: false
             },
             email: {
                 type: Sequelize.STRING,
@@ -78,7 +76,8 @@ class User extends Model {
             },
             is_admin: {
                 type: Sequelize.BOOLEAN,
-                allowNull: false
+                allowNull: true,
+                defaultValue: false
             }
         }, {
             timestamps: false,
