@@ -31,15 +31,15 @@ class Company extends Model {
                         }
                     }
                 },
-                branch_activity: {
-                    type: Sequelize.TIME,
+                description: {
+                    type: Sequelize.TEXT,
                     allowNull: {
-                        msg: "required field branch_activity!"
+                        msg: "required field description!"
                     },
                     validate: {
                         notEmpty: {
-                            msg: "branch_activity not empty!"
-                        },
+                            msg: "description not empty!"
+                        }
                     }
                 },
                 sector_uuid: {
