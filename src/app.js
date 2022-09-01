@@ -1,9 +1,10 @@
 import cors from "cors"
-import express, { response } from "express"
+import express from "express"
 import database from "./database/index.js"
 import User from "./database/models/user.js"
 
 import authRouter from "./routes/auth.js"
+import Helper from "./services/helper.js"
 
 const app = express()
 
@@ -12,7 +13,7 @@ app.set("trust proxy", true)
 app.use(express.json())
 
 
-app.use("/auth", authRouter)
+app.use("/auth", Helper.valideBody,authRouter)
 
 app.use("/test", async (req, resp) => {
         const users = await User.findAll()

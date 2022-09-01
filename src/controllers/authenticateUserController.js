@@ -15,13 +15,11 @@ export default class AuthenticateUser{
                     email
                 }
             })
-
             
             if(!userAlreadExist){
                 return response.status(404).json({error: `${email} does not exists!`})
             }
             
-            console.log(userAlreadExist)
             const matchPassword = await compare(password, userAlreadExist.password)
 
             if(!matchPassword){
@@ -37,9 +35,9 @@ export default class AuthenticateUser{
                 token,
                 uuid: userAlreadExist.uuid
             })
-        }catch(err){
 
-            response.status(404).json(err)
+        }catch({errors}){
+            return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
 
     }
