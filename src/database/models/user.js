@@ -16,8 +16,8 @@ class User extends Model {
                     msg: "email alread exists!"
                 },
                 validate: {
-                    isUrl: {
-                        msg: "email required validate url!"
+                    isEmail: {
+                        msg: "insert a valid email!"
                     },
                     notNull: {
                         msg: "email is required!"
@@ -78,7 +78,7 @@ class User extends Model {
             },
             is_admin: {
                 type: Sequelize.BOOLEAN,
-                allowNull: true,
+                allowNull: false,
                 defaultValue: false
             }
         }, {
@@ -89,8 +89,8 @@ class User extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.UserDepartment, { foreignKey: "department_uuid", as: "user_department" })
-        this.belongsTo(models.User, { foreignKey: "manager_uuid", as: "department" })
+        this.hasOne(models.Department, { foreignKey: "manager_uuid", as: "departments" })
+        this.hasOne(models.UserDepartment, { foreignKey: "user_uuid", as: "users_departments" })
     }
 }
 

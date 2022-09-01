@@ -12,14 +12,6 @@ class UserDepartment extends Model {
             user_uuid: {
                 type: Sequelize.UUID,
                 allowNull: false,
-                validate: {
-                    notEmpty: {
-                        msg: "user_uuid not empty"
-                    },
-                    notNull: {
-                        msg: "user_uuid is required!"
-                    }
-                },
                 references: { model: "users", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
@@ -27,29 +19,22 @@ class UserDepartment extends Model {
             department_uuid: {
                 type: Sequelize.UUID,
                 allowNull: false,
-                validate: {
-                    notEmpty: {
-                        msg: "department_uuid not empty"
-                    },
-                    notNull: {
-                        msg: "department_uuid is required!"
-                    }
-                },
                 references: { model: "departments", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
             }
         }, {
             timestamps: false,
-            tableName: "user_department",
+            tableName: "users_departments",
             sequelize
         })
     }
 
     static associate(models) {
-        this.hasOne(models.User, { foreignKey: "user_uuid", as: "user" })
-        this.hasOne(models.Department, { foreignKey: "department_uuid", as: "department" })
+        this.belongsTo(models.Department, { foreignKey: "department_uuid", as: "departments"})
+        this.belongsTo(models.User, { foreignKey: "user_uuid", as: "users"})
     }
 }
+
 
 export default UserDepartment

@@ -14,7 +14,7 @@ const listCompaniesService = async () => {
         }
     ],
         attributes: {
-            exclude: ["group_uuid", "sector_uuid", "company_uuid"]
+            exclude: ["group_uuid", "sector_uuid"]
         }
     })
 }
