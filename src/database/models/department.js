@@ -21,7 +21,7 @@ class Department extends Model {
                 }
             },
             description: {
-                type: Sequelize.STRING,
+                type: Sequelize.TEXT,
                 allowNull: {
                     msg: "required field description!"
                 },
