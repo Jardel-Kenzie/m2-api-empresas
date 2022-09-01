@@ -1,6 +1,7 @@
 import cors from "cors"
-import express from "express"
+import express, { response } from "express"
 import database from "./database/index.js"
+import User from "./database/models/user.js"
 
 import authRouter from "./routes/auth.js"
 
@@ -13,13 +14,19 @@ app.use(express.json())
 
 app.use("/auth", authRouter)
 
+app.use("/test", async (req, resp) => {
+        const users = await User.findAll()
 
+        return resp.json(users)
+})
 
 app.use((error, request, response, next) => {
     response.header("Access-Control-Allow-Origin", "*");
     return response.json({
         status: "Error",
-        message: error.message,  
+        error: {
+            message: error.message
+        },  
     })
 })
 

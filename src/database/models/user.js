@@ -12,11 +12,18 @@ class User extends Model {
             email: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true
+                unique: {
+                    msg: "email alread exists!"
+                }
             },
             username: {
                 type: Sequelize.STRING,
-                allowNull: false
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "username not empty"
+                    }
+                }
             },
             password: {
                 type: Sequelize.STRING,
