@@ -11,35 +11,39 @@ class Department extends Model {
             },
             name: {
                 type: Sequelize.STRING,
-                allowNull: {
-                    msg: "required field name!"
-                },
+                allowNull: false,
                 validate: {
                     notEmpty: {
                         msg: "name not empty!"
+                    },
+                    notNull: {
+                        msg: "name is required!"
                     }
+                    
                 }
             },
             description: {
                 type: Sequelize.TEXT,
-                allowNull: {
-                    msg: "required field description!"
-                },
+                allowNull: false,
                 validate: {
                     notEmpty: {
                         msg: "description not empty!"
+                    },
+                    notNull: {
+                        msg: "description is required!"
                     }
                 }
             },
             company_uuid: {
                 type: Sequelize.UUID,
-                allowNull: {
-                    msg: "required field company_uuid!"
-                },
+                allowNull:false,
                 validate: {
                     notEmpty: {
                         msg: "company_uuid not empty!"
                     },
+                    notNull: {
+                        msg: "company_uuid is required!"
+                    }
                 },
                 references: { model: "companies", key: "uuid"},
                 onUpdate: "CASCADE",
@@ -47,13 +51,14 @@ class Department extends Model {
             },
             manager_uuid: {
                 type: Sequelize.UUID,
-                allowNull: {
-                    msg: "required field manager_uuid!"
-                },
+                allowNull: false,
                 validate: {
                     notEmpty: {
                         msg: "manager_uuid not empty!"
                     },
+                    notNull: {
+                        msg: "manager_uuid is required!"
+                    }
                 },
                 references: { model: "users", key: "uuid"},
                 onUpdate: "CASCADE",

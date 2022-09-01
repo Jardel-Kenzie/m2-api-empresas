@@ -9,7 +9,11 @@ export default class CreateUsers{
 
         const {username, email, password, professional_level, kind_of_work} = body
         
+        if(!password){
+            return response.status(400).json({error: "required field password!"})
+        }
         const passwordHashCode = await hash(password, 8)
+        
         
         try{
             const newUser = await User.create({
@@ -22,7 +26,7 @@ export default class CreateUsers{
         
             return response.status(201).json(newUser)
 
-        }catch({errors}){
+        }catch(errors){
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
     }
@@ -35,10 +39,13 @@ export default class CreateUsers{
                 is_admin: true
             }
         })
-
         
         if(adminAlreadExist){
             return response.status(401).json({error: "admin alread exists!"})
+        }
+
+        if(!password){
+            return response.status(400).json({error: "required field password!"})
         }
 
         const passwordHashCode = await hash(password, 8)
@@ -51,10 +58,12 @@ export default class CreateUsers{
                 professional_level,
                 kind_of_work,
                 is_admin: true
+            },  {
+                fields: ["username", "email", "professional_level", "kind_of_work"]
             })
 
             return response.status(2001).json(userAdmin)
-        }catch({errors}){
+        }catch(errors){
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
     }

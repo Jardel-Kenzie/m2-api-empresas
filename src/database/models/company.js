@@ -11,46 +11,50 @@ class Company extends Model {
                 },
                 name: {
                     type: Sequelize.STRING,
-                    allowNull: {
-                        msg: "required field name!"
-                    },
+                    allowNull: false,
                     validate: {
                         notEmpty: {
                             msg: "name not empty!"
+                        },
+                        notNull: {
+                            msg: "name is required!"
                         }
                     }
                 },
                 opening_hours: {
                     type: Sequelize.TIME,
-                    allowNull: {
-                        msg: "required field opening_hours!"
-                    },
+                    allowNull: false,
                     validate: {
                         notEmpty: {
                             msg: "opening_hours not empty!"
+                        },
+                        notNull: {
+                            msg: "opening_hours is required!"
                         }
                     }
                 },
                 description: {
                     type: Sequelize.TEXT,
-                    allowNull: {
-                        msg: "required field description!"
-                    },
+                    allowNull: false,
                     validate: {
                         notEmpty: {
                             msg: "description not empty!"
+                        },
+                        notNull: {
+                            msg: "description is required!"
                         }
                     }
                 },
                 sector_uuid: {
                     type: Sequelize.UUID,
-                    allowNull: {
-                        msg: "required field sector_uuid!"
-                    },
+                    allowNull: false,
                     validate: {
                         notEmpty: {
                             msg: "sector_uuid not empty!"
                         },
+                        notNull: {
+                            msg: "sector_uuid is required!"
+                        }
                     },
                     references: { model: "sectors", key: "uuid"},
                     onUpdate: "CASCADE",
@@ -58,13 +62,14 @@ class Company extends Model {
                 },
                 group_uuid: {
                     type: Sequelize.UUID,
-                    allowNull: {
-                        msg: "required field group_uuid!"
-                    },
+                    allowNull: false,
                     validate: {
                         notEmpty: {
                             msg: "group_uuid not empty!"
                         },
+                        notNull: {
+                            msg: "group_uuid is required!"
+                        }
                     },
                     references: { model: "groups", key: "uuid"},
                     onUpdate: "CASCADE",
