@@ -1,10 +1,10 @@
-import UserDepartment from "./models/userDepartment.js"
 import Department from "./models/department.js"
 import Company from "./models/company.js"
 import Sector from "./models/sector.js"
 import Group from "./models/group.js"
 import Sequelize from "sequelize"
 import User from "./models/user.js"
+import UserDepartment from "./models/userDepartment.js"
 
 const config = {
     dialect: 'sqlite',

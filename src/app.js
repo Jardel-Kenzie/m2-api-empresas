@@ -32,6 +32,6 @@ app.use((error, request, response, next) => {
     })
 })
 
-app.listen(6278, () => {
+app.listen(6272, () => {
     console.log("App is running http://localhost:6278/ 🚀 ")
 })

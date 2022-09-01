@@ -29,7 +29,7 @@ class Group extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Company, { foreignKey: "company_uuid", as: "companies" })
+        this.hasMany(models.Company, { foreignKey: "group_uuid", as: "companies" })
     }
 }
 
