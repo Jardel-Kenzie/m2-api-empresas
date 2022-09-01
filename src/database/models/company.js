@@ -14,15 +14,11 @@ class Company extends Model {
                     allowNull: false
                 },
                 opening_hours: {
-                    type: Sequelize.STRING,
+                    type: Sequelize.TIME,
                     allowNull: false
                 },
                 branch_activity: {
-                    type: Sequelize.STRING,
-                    allowNull: false
-                },
-                branch_activity: {
-                    type: Sequelize.STRING,
+                    type: Sequelize.TIME,
                     allowNull: false
                 },
                 sector_uuid: {
