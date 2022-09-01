@@ -14,14 +14,14 @@ import populateUsers from "./populateUsers.js"
         const groups = await populateGroups()
         const sectors = await populateSectors()
         
-        createCompany(sectors[0].uuid, groups[0].uuid, "Skina Lanches")
-        createCompany(sectors[0].uuid, groups[0].uuid, "Gela Guela")
+        createCompany(sectors[0].uuid, groups[0].uuid, "Skina Lanches", "Podrão de qualidade")
+        createCompany(sectors[0].uuid, groups[0].uuid, "Gela Guela", "Sorvetes barateza")
 
-        createCompany(sectors[5].uuid, groups[1].uuid, "Boacharria")
-        createCompany(sectors[5].uuid, groups[1].uuid, "Offcina")
+        createCompany(sectors[5].uuid, groups[1].uuid, "Boacharria", "Se furar o pneu, conta comigo")
+        createCompany(sectors[5].uuid, groups[1].uuid, "Offcina", "Arrumamos seu carro")
 
-        const nerdLab = await createCompany(sectors[6].uuid, groups[2].uuid, "Nerd lab", true)
-        createCompany(sectors[6].uuid, groups[2].uuid, "Chipset manutenções")
+        const nerdLab = await createCompany(sectors[6].uuid, groups[2].uuid, "Nerd lab", "Criamos um site rapidão pra você")
+        createCompany(sectors[6].uuid, groups[2].uuid, "Chipset manutenções", "Arrumamos o PC")
 
 
         const ti = await createDepartment("TI", "Departamento de TI", nerdLab.uuid, users[1].uuid)

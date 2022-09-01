@@ -78,9 +78,9 @@ class Company extends Model {
     }
 
     static associate(models){
-        this.hasOne(models.Sector, { foreignKey: "sector_uuid", as: "sectors" })
-        this.hasOne(models.Department, { foreignKey: "department_uuid", as: "department" })
         this.belongsTo(models.Group, { foreignKey: "group_uuid", as: "groups" })
+        this.belongsTo(models.Sector, { foreignKey: "sector_uuid", as: "sectors" })
+        this.hasMany(models.Department, { foreignKey: "department_uuid", as: "department" })
     }
 }
 

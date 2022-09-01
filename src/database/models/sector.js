@@ -30,7 +30,7 @@ class Sector extends Model {
     }
 
     static associate(models) {
-        this.belongsToMany(models.Company,{ foreignKey: "company_uuid", as: "companies" })
+        this.hasMany(models.Company,{ foreignKey: "company_uuid", as: "companies" })
     }
 }
 
