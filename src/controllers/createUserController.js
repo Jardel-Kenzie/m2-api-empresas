@@ -1,40 +1,35 @@
 import pkgBcrypt from 'bcryptjs';
-import pkgUuidv4 from 'uuidv4';
 
 import User from "../database/models/user.js";
+import Helper from '../services/helper.js';
 
-const { uuid } = pkgUuidv4;
 const { hash } = pkgBcrypt;
 export default class CreateUsers{
     static async executeUser({body}, response){
 
         const {username, email, password, professional_level, kind_of_work} = body
-
+        
+        const passwordHashCode = await hash(password, 8)
+        
         try{
-                const idCrypt = uuid()
-                
-                const passwordHashCode = await hash(password, 8)
-                
-                const newUser = await User.create({
-                    uuid: idCrypt,
-                    username,
-                    email,
-                    password: passwordHashCode,
-                    professional_level,
-                    kind_of_work,
-                    is_admin: false
-                })
-    
-                return response.status(201).json(newUser)
-            }catch(errors){
-                return response.status(400).json({ error: errors})
-            }
+            const newUser = await User.create({
+                username,
+                email,
+                password: passwordHashCode,
+                professional_level,
+                kind_of_work,
+                is_admin: false
+            })
+        
+            return response.status(201).json(newUser)
+
+        }catch({errors}){
+            return response.status(400).json({ error: Helper.organizationErrors(errors)})
+        }
     }
 
     static async executeAdminUser(request, response){
         const {username, email, password, professional_level, kind_of_work} = request.body
-
-            
         
         const adminAlreadExist = await User.findOne({
             where:{
@@ -47,13 +42,10 @@ export default class CreateUsers{
             return response.status(401).json({error: "admin alread exists!"})
         }
 
-        const idCrypt = uuid()
-
         const passwordHashCode = await hash(password, 8)
 
         try{
             const userAdmin = await User.create({
-                uuid: idCrypt,
                 username,
                 email,
                 password: passwordHashCode,
@@ -63,8 +55,8 @@ export default class CreateUsers{
             })
 
             return response.status(2001).json(userAdmin)
-        }catch(err){
-            return response.status(201).json({error: err.menssage})
+        }catch({errors}){
+            return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
     }
 }
