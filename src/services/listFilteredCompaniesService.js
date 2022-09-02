@@ -1,18 +1,18 @@
 import Company from "../database/models/company.js"
 import Sector from "../database/models/sector.js"
 
-const listCompaniesService = async () => {
+const listFilteredCompaniesService = async (sector) => {
+
     return await Company.findAll({
-        include: [
-        {
+        include: {
             model: Sector,
             as: "sectors",
-        }
-    ],
+            where: { description: sector }
+        },
         attributes: {
             exclude: ["sector_uuid"]
         }
     })
 }
 
-export default listCompaniesService
+export default listFilteredCompaniesService
