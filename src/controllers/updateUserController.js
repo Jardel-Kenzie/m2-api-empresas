@@ -10,7 +10,7 @@ const updateUserController = async (request, response) => {
 
     const emailExists = await User.findOne({
         where:{
-            email
+            email  
         }
     })
 
