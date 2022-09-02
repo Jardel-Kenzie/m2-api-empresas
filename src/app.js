@@ -21,7 +21,7 @@ app.use(express.json())
 
 app.use("/auth", Helper.valideBody,authRouter)
 app.use("/companies", Helper.valideBody, companiesRouter)
-app.use("/admin", AuthToken.isAdmin,  Helper.valideBody, adminRouter)
+app.use("/admin", AuthToken.isAdmin, adminRouter)
 app.use("/users", Helper.valideBody, usersRouter)
 
 app.use("/test", Helper.valideBody, AuthToken.isAdmin, async (req, resp) => {
