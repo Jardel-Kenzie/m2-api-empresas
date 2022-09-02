@@ -9,7 +9,7 @@ const { sign } = pkgJwt;
 export default class AuthenticateUser{
     static async execute(request, response){
         const {email = "", password} = request.body
-
+        
         
         const userAlreadExist = await User.findOne({
             where:{
