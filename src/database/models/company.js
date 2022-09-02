@@ -60,6 +60,7 @@ class Company extends Model {
                     onUpdate: "CASCADE",
                     onDelete: "CASCADE"
                 },
+                /*
                 group_uuid: {
                     type: Sequelize.UUID,
                     allowNull: false,
@@ -74,7 +75,7 @@ class Company extends Model {
                     references: { model: "groups", key: "uuid"},
                     onUpdate: "CASCADE",
                     onDelete: "CASCADE"
-                }
+                }*/
             }, {
                 timestamps: false,
                 tableName: "companies",
@@ -83,7 +84,7 @@ class Company extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Group, { foreignKey: "group_uuid", as: "groups" })
+        //this.belongsTo(models.Group, { foreignKey: "group_uuid", as: "groups" })
         this.belongsTo(models.Sector, { foreignKey: "sector_uuid", as: "sectors" })
         this.hasMany(models.Department, { foreignKey: "company_uuid", as: "departments" })
     }

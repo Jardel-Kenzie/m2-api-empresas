@@ -1,14 +1,13 @@
 import Company from "../database/models/company.js"
 import Helper from "./helper.js"
 
-const createCompanyService = async (name, opening_hours, description, sector_uuid, group_uuid, response) => {
+const createCompanyService = async (name, opening_hours, description, sector_uuid, response) => {
     try {
         const createdCompany = await Company.create({
             name,
             opening_hours,
             description,
-            sector_uuid,
-            group_uuid
+            sector_uuid
         })
         
         return createdCompany
