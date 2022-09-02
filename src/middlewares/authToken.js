@@ -55,7 +55,7 @@ export default class AuthToken{
         }
 
         
-        const uuid =  verify(token, "kenzie", (err, decoded) => {
+        verify(token, "kenzie", (err, decoded) => {
             if(err){
                 return response.status(401).json({error: err.message})
             }
