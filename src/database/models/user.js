@@ -53,7 +53,7 @@ class User extends Model {
                 allowNull: true,
                 validate: {
                     customValidate(value){
-                        if(!["estágio","júnior","pleno","sênior"].includes(value)){
+                        if(value && !["estágio","júnior","pleno","sênior"].includes(value)){
                             throw new Error("professional_level must be one of these: estágio, júnior, pleno, sênior")
                         }
                     }
@@ -64,7 +64,7 @@ class User extends Model {
                 allowNull: true,
                 validate: {
                     customValidate(value){
-                        if(!["home office", "presencial", "hibrido"].includes(value)){
+                        if(value && !["home office", "presencial", "hibrido"].includes(value)){
                             throw new Error("kind_of_work must be one of these: home office, presencial, hibrido")
                         }
                     }
