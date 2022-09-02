@@ -6,7 +6,13 @@ import Helper from "../services/helper.js";
 
 export default class AdminController{
     static async getDepartments(request, response){
-        const departments = await Department.findAll()
+        const departments = await Department.findAll({
+            include: [{
+                model: Company,
+                as: "companies"
+            }],
+            attributes: {exclude: ["company_uuid"]}
+        })
 
         return response.status(200).json(departments)
     }
@@ -19,7 +25,12 @@ export default class AdminController{
         const departments = await Department.findAll({
             where:{
                 company_uuid: company
-            }
+            },
+            include: [{
+                model: Company,
+                as: "companies"
+            }],
+            attributes: {exclude: ["company_uuid"]}
         })
 
         return response.status(200).json(departments)

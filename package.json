@@ -7,7 +7,6 @@
   "author": "Raphael <raphael@kenzie.com.br>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec sucrase-node ./src/index.js",
     "dev": "nodemon --exec sucrase-node ./src/app.js",
     "seed": "node src/database/seed/index.js"
   },
