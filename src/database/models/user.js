@@ -52,22 +52,22 @@ class User extends Model {
                 type: Sequelize.STRING,
                 allowNull: true,
                 validate: {
-                    customValidate(value){
+                    /*customValidate(value){
                         if(!["estágio","júnior","pleno","sênior"].includes(value)){
                             throw new Error("professional_level must be one of these: estágio, júnior, pleno, sênior")
                         }
-                    }
+                    }*/
                 }
             },
             kind_of_work: {
                 type: Sequelize.STRING,
                 allowNull: true,
                 validate: {
-                    customValidate(value){
+                    /*customValidate(value){
                         if(!["home office", "presencial", "hibrido"].includes(value)){
                             throw new Error("kind_of_work must be one of these: home office, presencial, hibrido")
                         }
-                    }
+                    }*/
                 }
             },
             is_admin: {

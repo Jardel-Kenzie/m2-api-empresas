@@ -50,6 +50,7 @@ export default class CreateUsers{
 
         const passwordHashCode = await hash(password, 8)
 
+        
         try{
             const userAdmin = await User.create({
                 username,
@@ -58,10 +59,8 @@ export default class CreateUsers{
                 professional_level,
                 kind_of_work,
                 is_admin: true
-            },  {
-                fields: ["username", "email", "professional_level", "kind_of_work"]
             })
-
+            
             return response.status(2001).json(userAdmin)
         }catch(errors){
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
