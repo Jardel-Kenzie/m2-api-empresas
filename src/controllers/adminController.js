@@ -6,7 +6,32 @@ import Helper from "../services/helper.js";
 
 export default class AdminController{
     static async getDepartments(request, response){
-        const departments = await Department.findAll()
+        const departments = await Department.findAll({
+            include: [{
+                model: Company,
+                as: "companies"
+            }],
+            attributes: {exclude: ["company_uuid"]}
+        })
+
+        return response.status(200).json(departments)
+    }
+
+    static async getDepartmentsByCompany(request, response){
+        const {company} = request.params
+
+        console.log(company)
+
+        const departments = await Department.findAll({
+            where:{
+                company_uuid: company
+            },
+            include: [{
+                model: Company,
+                as: "companies"
+            }],
+            attributes: {exclude: ["company_uuid"]}
+        })
 
         return response.status(200).json(departments)
     }
@@ -17,6 +42,8 @@ export default class AdminController{
             where:  {
                 department_uuid: null,
                 is_admin:false
+            }, attributes: {
+                exclude: ["password"]
             }
         })
 
@@ -24,27 +51,11 @@ export default class AdminController{
     }
 
     static async getSectors(request, response){
-        const sectors = Sector.findAll()
+        const sectors = await Sector.findAll()
 
         return response.status(200).json(sectors)
     }
 
-
-    static async createSector(request, response){
-        const {description} = request.body
-
-        try{
-
-            const newSector = await Sector.create({
-                description
-            })
-
-            return response.status(201).json(newSector)
-
-        }catch(errors) {
-            return response.status(400).json({ error: Helper.organizationErrors(errors)})
-        }
-    }
 
     static async createCompany(request, response){
 
@@ -61,6 +72,10 @@ export default class AdminController{
             return response.status(201).json(createdCompany)
     
         } catch(errors) {
+            if(errors.name === "SequelizeForeignKeyConstraintError"){
+                return response.status(400).json({error: "sector_uuid not found"})
+            }
+            
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
     }
@@ -78,6 +93,9 @@ export default class AdminController{
             return response.status(201).json(createdDepartment)
     
         } catch(errors) {
+            if(errors.name === "SequelizeForeignKeyConstraintError"){
+                return response.status(400).json({error: "company_uuid not found"})
+            }
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
     }
@@ -139,6 +157,24 @@ export default class AdminController{
         } catch(errors) {
             return response.status(400).json({ error: Helper.organizationErrors(errors)})
         }
+    }
+
+    static async deleteDepartment(request, response){
+        const {department} = request.params
+
+        const depart = await Department.findByPk(department)
+
+        if(!depart){
+            return response.status(404).json({error: "department not found"})
+        }
+
+        try{
+            depart.destroy()
+            return response.status(204).json()
+        }catch(errors){
+            return response.status(400).json({ error: Helper.organizationErrors(errors)})
+        }
+
     }
 
    

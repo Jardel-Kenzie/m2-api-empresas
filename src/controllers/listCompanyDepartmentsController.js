@@ -9,9 +9,14 @@ const listCompanyDepartmentsController = async (request, response) => {
         return decoded.uuid
     })
 
-    const departments = await listCompanyDepartmentsService(uuid)
+    try{
+        const departments = await listCompanyDepartmentsService(uuid)
+        
+        return response.json(departments)
+    }catch(er){
+        return response.status(400).json({error: "you don't belong to a department"})
+    }
 
-    return response.json(departments)
 }
 
 

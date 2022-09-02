@@ -10,13 +10,11 @@ export default class Helper{
 
     static organizationErrors(erros){
         try{
-
             if(erros.errors.length > 0){
                 
                 return erros.errors.map(({message}) => message)
             }
         }catch(er){
-
             return erros
         }
 

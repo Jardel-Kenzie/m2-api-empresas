@@ -16,27 +16,22 @@ export default class AuthToken{
         }
 
         
-        const uuid =  verify(token, "kenzie", (err, decoded) => {
+        const is_admin =  verify(token, "kenzie", (err, decoded) => {
             if(err){
                 return response.status(401).json({error: err.message})
             }
 
-            return decoded.uuid
+            return decoded.is_admin
         })
         
-        return uuid
+        return is_admin
     }
     
     static async isAdmin(request, response, next){
-        const uuid = await AuthToken.tokenBasic(request, response)
+        const is_admin = await AuthToken.tokenBasic(request, response)
 
-        const user = await User.findOne({
-            where: {
-                uuid
-            }
-        })
 
-        if(!user.is_admin){
+        if(!is_admin){
             return response.status(401).json({error:"need admin permission to access"})
         }
 
@@ -58,6 +53,8 @@ export default class AuthToken{
         verify(token, "kenzie", (err, decoded) => {
             if(err){
                 return response.status(401).json({error: err.message})
+            }else if(decoded.is_admin){
+                return response.status(400).json({error: "you are admin, use the route: users"})
             }
 
             return decoded.uuid
