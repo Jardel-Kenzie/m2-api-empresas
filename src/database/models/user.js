@@ -74,7 +74,7 @@ class User extends Model {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
                 defaultValue: false
-            }
+            },
         }, {
             timestamps: false,
             tableName: "users",

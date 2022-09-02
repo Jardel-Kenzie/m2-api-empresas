@@ -4,8 +4,7 @@ import CreateUsers from "../controllers/createUserController.js";
 
 const router = Router();
 
-router.post("/register/user", CreateUsers.executeUser)
-router.post("/register/admin", CreateUsers.executeAdminUser)
-router.post("/login", AuthenticateUser.execute)
+router.post("/register/user", CreateUsers.executeUser) // corect
+router.post("/login", AuthenticateUser.execute) // correct
 
 export default router
