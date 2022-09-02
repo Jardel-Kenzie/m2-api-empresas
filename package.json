@@ -2,7 +2,25 @@
   "name": "m2-api-empresas",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/Jardel-Kenzie/m2-api-empresas.git",
   "author": "Raphael <raphael@kenzie.com.br>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec sucrase-node ./src/app.js",
+    "seed": "node src/database/seed/index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.19",
+    "sequelize": "^6.21.4",
+    "sqlite3": "^5.0.11",
+    "sucrase": "^3.25.0",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
+    "yup": "^0.32.11"
+  }
 }
