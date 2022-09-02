@@ -48,7 +48,7 @@ class Department extends Model {
                 references: { model: "companies", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
-            },
+            },/*
             manager_uuid: {
                 type: Sequelize.UUID,
                 allowNull: false,
@@ -63,7 +63,7 @@ class Department extends Model {
                 references: { model: "users", key: "uuid"},
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE"
-            }
+            }*/
         }, {
             timestamps: false,
             tableName: "departments",
@@ -73,8 +73,9 @@ class Department extends Model {
 
     static associate(models) {
         this.belongsTo(models.Company, { foreignKey: "company_uuid", as: "companies" })
-        this.belongsTo(models.User, { foreignKey: "manager_uuid", as: "users" })
-        this.hasMany(models.UserDepartment, { foreignKey: "department_uuid", as: "users_departments" })
+        this.hasMany(models.User, {foreignKey: "department_uuid", as: "users"})
+        //this.belongsTo(models.User, { foreignKey: "manager_uuid", as: "users" })
+        //this.hasMany(models.UserDepartment, { foreignKey: "department_uuid", as: "users_departments" })
     }
 }
 

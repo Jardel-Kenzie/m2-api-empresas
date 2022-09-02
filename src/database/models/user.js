@@ -9,6 +9,18 @@ class User extends Model {
                 primaryKey: true,
                 allowNull: false
             },
+            username: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: "username not empty!"
+                    },
+                    notNull: {
+                        msg: "username is required!"
+                    }
+                }
+            },
             email: {
                 type: Sequelize.STRING,
                 allowNull: false,
@@ -21,18 +33,6 @@ class User extends Model {
                     },
                     notNull: {
                         msg: "email is required!"
-                    }
-                }
-            },
-            username: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: {
-                        msg: "username not empty!"
-                    },
-                    notNull: {
-                        msg: "username is required!"
                     }
                 }
             },
@@ -50,30 +50,24 @@ class User extends Model {
             },
             professional_level: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: {
                     customValidate(value){
                         if(!["estágio","júnior","pleno","sênior"].includes(value)){
                             throw new Error("professional_level must be one of these: estágio, júnior, pleno, sênior")
                         }
-                    },
-                    notNull: {
-                        msg: "professional_level is required!"
                     }
                 }
             },
             kind_of_work: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: {
                     customValidate(value){
                         if(!["home office", "presencial", "hibrido"].includes(value)){
                             throw new Error("kind_of_work must be one of these: home office, presencial, hibrido")
                         }
-                    },
-                    notNull: {
-                        msg: "kind_of_work is required!"
-                    },
+                    }
                 }
             },
             is_admin: {
@@ -89,8 +83,8 @@ class User extends Model {
     }
 
     static associate(models) {
-        this.hasOne(models.Department, { foreignKey: "manager_uuid", as: "departments" })
-        this.hasOne(models.UserDepartment, { foreignKey: "user_uuid", as: "users_departments" })
+        this.belongsTo(models.Department, { foreignKey: "department_uuid", as: "departments" })
+        //this.hasOne(models.UserDepartment, { foreignKey: "user_uuid", as: "users_departments" })
     }
 }
 

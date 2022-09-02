@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize"
+/*import Sequelize, { Model } from "sequelize"
 
 class UserDepartment extends Model {
     static init(sequelize) {
@@ -37,4 +37,4 @@ class UserDepartment extends Model {
 }
 
 
-export default UserDepartment
+export default UserDepartment*/
