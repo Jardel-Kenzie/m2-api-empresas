@@ -52,16 +52,15 @@ export default class AuthToken{
         
         verify(token, "kenzie", (err, decoded) => {
             if(err){
-                return response.status(401).json({error: err.message})
+                return response.status(401).json({error: "invalid token"})
             }else if(decoded.is_admin){
                 return response.status(400).json({error: "you are admin, use the route: users"})
             }else if(!decoded.uuid){
-                return response.status(400).json({error: "invalid token"})
+                return response.status(401).json({error: "invalid token"})
+            }else {
+                next()
             }
-
-            return decoded.uuid
         })
 
-        next()
     }
 }
