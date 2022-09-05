@@ -2,8 +2,6 @@ import Department from "../database/models/department.js"
 import updateDepartmentService from "../services/updateDepartmentService.js"
 
 const updateDepartmentController = async (request, response) => {
-    console.log("VVVVVVVVVVVVVVVVVVVV")
-    console.log(request.body)
     const { name, description } = request.body
     const { department_uuid } = request.params
 

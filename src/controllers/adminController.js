@@ -20,8 +20,6 @@ export default class AdminController{
     static async getDepartmentsByCompany(request, response){
         const {company} = request.params
 
-        console.log(company)
-
         const departments = await Department.findAll({
             where:{
                 company_uuid: company
@@ -133,8 +131,6 @@ export default class AdminController{
 
     static async deleteDepartmentForUser(request, response){
         const {user_uuid} = request.params
-
-        console.log(request.params)
 
         const user = await User.findByPk(user_uuid)
 
