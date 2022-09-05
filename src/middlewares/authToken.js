@@ -55,6 +55,8 @@ export default class AuthToken{
                 return response.status(401).json({error: err.message})
             }else if(decoded.is_admin){
                 return response.status(400).json({error: "you are admin, use the route: users"})
+            }else if(!decoded.uuid){
+                return response.status(400).json({error: "invalid token"})
             }
 
             return decoded.uuid
