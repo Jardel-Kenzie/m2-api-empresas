@@ -12,9 +12,10 @@ const updateUserController = async (request, response) => {
         where:{
             email  
         }
-    })
+    }).catch(err => console.log(err))
 
     if(emailExists){
+        console.log(emailExists)
         return response.status(400).json({error: "email alread exists"})
     }
 
