@@ -10,8 +10,8 @@ const router = Router();
 router.get("", AdminController.getDepartments) // correct
 router.get("/:company", AdminController.getDepartmentsByCompany) // correct
 router.post("", Helper.valideBody, AdminController.createDepartment) //correct
-router.patch("/:department_uuid", AuthToken.isAdmin, Helper.valideBody, updateDepartmentController) //correct
 router.patch("/hire", Helper.valideBody, AdminController.createEngage) //correct
+router.patch("/:department_uuid", AuthToken.isAdmin, Helper.valideBody, updateDepartmentController) //correct
 router.patch("/dismiss/:user_uuid", AdminController.deleteDepartmentForUser) //correct
 router.delete("/:department", AdminController.deleteDepartment) // correct
 
