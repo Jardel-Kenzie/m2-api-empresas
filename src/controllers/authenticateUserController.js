@@ -25,7 +25,6 @@ export default class AuthenticateUser{
             return response.status(401).json({error: "required password!"})
         }
         
-        console.log(password)
         
         try{
             const matchPassword = await compare(password, userAlreadExist.password)
