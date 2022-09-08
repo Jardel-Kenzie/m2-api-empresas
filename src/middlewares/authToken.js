@@ -5,6 +5,10 @@ const { verify } = pkgJwt
 
 export default class AuthToken{
     static async tokenBasic (request, response) {
+        if(!request.headers){
+            return response.status(401).json({error: "headers required"})
+        }
+
         if(!request.headers.authorization){
             return response.status(401).json({error: "header authorization required"})
         }
@@ -39,6 +43,10 @@ export default class AuthToken{
     }
 
     static async hasBasicToken(request, response, next) {
+        if(!request.headers){
+            return response.status(401).json({error: "headers required"})
+        }
+        
         if(!request.headers.authorization){
             return response.status(401).json({error: "header authorization required"})
         }
