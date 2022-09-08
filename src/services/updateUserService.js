@@ -8,24 +8,19 @@ const updateUserService = async (password, email, username, uuid, response) => {
 
     const user = await User.findByPk(uuid)
     if(user && email){
-        try{
-            user.update({
-                username: username || user.username,
-                password: await hash(password, 8) || user.password,
-            })
-        }catch(err){
-            return response.status(400).json({error: Helper.organizationErrors(errors)})
-        }
+
+        user.update({
+            username: username || user.username,
+            password: await hash(password, 8) || user.password,
+            email: email || user.email
+        })
+
     } else if(user){
-        try{
-            user.update({
-                username: username || user.username,
-                password: await hash(password, 8) || user.password,
-                email: email || user.email
-            })
-        }catch(err){
-            return response.status(400).json({error: Helper.organizationErrors(errors)})
-        }
+        user.update({
+            username: username || user.username,
+            password: await hash(password, 8) || user.password,
+        })
+      
     }
 
     return user
