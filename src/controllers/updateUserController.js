@@ -8,6 +8,8 @@ const { verify } = pkgJwt
 const updateUserController = async (request, response) => {
     const { password, email, username } = request.body
 
+    
+
     const emailExists = await User.findOne({
         where:{
             email  
