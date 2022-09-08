@@ -4,11 +4,12 @@ import Helper from "./helper.js";
 const { hash } = pkgBcrypt;
 
 
-const updateUserService = async (password, email, username, uuid, response) => {
+const updateUserService = async (password, email, username, uuid) => {
 
     const user = await User.findByPk(uuid)
-    if(user && email){
 
+    if(user && email){
+   
         user.update({
             username: username || user.username,
             password: await hash(password, 8) || user.password,
@@ -20,8 +21,9 @@ const updateUserService = async (password, email, username, uuid, response) => {
             username: username || user.username,
             password: await hash(password, 8) || user.password,
         })
-      
+
     }
+
 
     return user
 
