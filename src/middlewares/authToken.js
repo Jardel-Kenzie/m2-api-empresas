@@ -1,5 +1,4 @@
 import pkgJwt from 'jsonwebtoken';
-import User from '../database/models/user.js';
 
 const { verify } = pkgJwt
 
