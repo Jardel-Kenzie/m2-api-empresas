@@ -12,9 +12,14 @@ export const getProfile = async (request, response) => {
         }
         return decoded.uuid
     })
-
+    
     const alreadUser = await User.findByPk(uuid)
+    
+    if(alreadUser){
+        return response.status(200).json(alreadUser)
+    }
 
-    return response.status(200).json(alreadUser)
+    return response.status(404).json({error: "user not exists, verify token"})
+
         
 }
