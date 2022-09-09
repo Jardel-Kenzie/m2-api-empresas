@@ -6,9 +6,7 @@ import User from '../database/models/user.js'
 const { verify } = pkgJwt
 
 const updateUserController = async (request, response) => {
-    const { password, email, username } = request.body
-
-    
+    const { password="", email="", username="" } = request.body
 
     const emailExists = await User.findOne({
         where:{
@@ -21,7 +19,6 @@ const updateUserController = async (request, response) => {
     }
 
     try{
-        
         const [, token] = request.headers.authorization.split(" ")
 
         const uuid = verify(token, "kenzie", (_, decoded) => {
@@ -32,7 +29,7 @@ const updateUserController = async (request, response) => {
 
         return response.status(200).json(updatedUser)
     }catch(errors){
-        return response.status(400).json({error: Helper.organizationErrors(errors)})
+        return response.status(400).json({error: Helper.organizationErrors("errors")})
     }
 
 }

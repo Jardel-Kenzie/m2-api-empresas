@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="projeto/style/reset.css">
+	<link rel="stylesheet" href="projeto/style/root.css">
+	<link rel="stylesheet" href="projeto/style/index.css">
+	<link rel="stylesheet" href="projeto/style/modal.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<title>Kenzie empresas</title>
+</head>
+
+<body>
+	<section class="login-section">
+		<div class="login-square">
+			<h2 class="login-title title-h1">Bem vindo</h2>
+			<h3 class="login-text ">Fazer login</h3>
+			<input type="email" placeholder="Insira seu e-mail" class="login-input" id="email">
+			<input type="password" placeholder="Insira sua senha" class="login-input" id="password">
+			<button class="login-btn-enter">Entrar</button>
+			<span class="login-aux-2">ou</span>
+			<button class="login-btn-new">Criar nova conta</button>
+		</div>
+		<form action="#" class="register-section hidden2">
+			<div class="register-square">
+				<h2 class="register-title title-3">Registrar nova conta</h2>
+				<input type="text" placeholder="Insira seu nome" class="login-input" id="register-name">
+				<input type="email" placeholder="Seu melhor e-mail" class="login-input" id="register-email">
+				<input type="password" placeholder="Sua senha" class="login-input" id="register-password-1">
+				<input type="password" placeholder="Confirme a senha" class="login-input" id="register-password-2">
+				<div class="register-level">
+					<h3>Nivel profissional:</h3>
+					<select name="" id="register-professional-level">
+						<option value="estágio">Estágio</option>
+						<option value="júnior">Júnior</option>
+						<option value="pleno">Pleno</option>
+						<option value="sênior">Sênior</option>
+					</select>
+				</div>
+				<button class="register-btn">Registrar conta</button>
+				<h3 class="login-text">Já possui conta?</h3>
+				<button class="login-btn-return">Retornar ao login</button>
+			</div>
+		</form>
+		<span class="rescue">Empresas parceiras!!! veja mais</span>
+
+		<div class="slides">
+			<div class="slide-container">
+				<div class="slide1">
+					<h2 class="slide-title">Skina Lanches</h2>
+					<p class="slide-slogan">Podrão de qualidade</p>
+				</div>
+				<div class="slide2">
+					<h2 class="slide-title">Gela Guela</h2>
+					<p class="slide-slogan">Sorvetes barateza</p>
+				</div>
+				<div class="slide3">
+					<h2 class="slide-title">Boacharria</h2>
+					<p class="slide-slogan">Se furar o pneu, conta comigo</p>
+				</div>
+				<div class="slide4">
+					<h2 class="slide-title">Offcina</h2>
+					<p class="slide-slogan">Arrumamos seu carro</p>
+				</div>
+				<div class="slide5">
+					<h2 class="slide-title">Nerd lab</h2>
+					<p class="slide-slogan">Criamos um site rapidão pra você</p>
+				</div>
+				<div class="slide6">
+					<h2 class="slide-title">Chipset manutenções</h2>
+					<p class="slide-slogan">Arrumamos o PC</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-companies hidden">
+			<div class="modal-square">			<span class="modal-close">X</span>	
+				<select name="" id="list-sectors"> 
+					<option value="">Selecione uma opção</option>
+					<option value="">Todos os setores</option>
+					<option value="Alimenticio">Alimenticio</option>
+					<option value="Varejo">Varejo</option>
+					<option value="Textil">Textil</option>
+					<option value="Manufatura">Manufatura</option>
+					<option value="Aeroespacial">Aeroespacial</option>
+					<option value="Automotiva">Automotiva</option>
+					<option value="TI">TI</option>
+					<option value="Atacado">Atacado</option>
+				</select>			
+				<div class="company">					
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<script type="module" src="projeto/script/login.js"></script>
+	<script type="module" src="projeto/script/modal.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>
