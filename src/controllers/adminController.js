@@ -5,6 +5,30 @@ import User from "../database/models/user.js";
 import Helper from "../services/helper.js";
 
 export default class AdminController{
+
+    static async deleteUser(request, response){
+        const { user_uuid } = request.params
+
+        const user = await User.findByPk(user_uuid)
+        
+        if(!user){
+            return response.status(404).json({error: "User not found"})
+        }
+
+        if(user.is_admin){
+            return response.status(401).json({error: "Admin cannot be deleted"})
+        }
+
+        try{
+            user.destroy()
+
+            return response.status(204).json()
+        }catch(error){
+            return response.status(400).json({ error: Helper.organizationErrors(error)})
+        }
+        
+    }
+
     static async getDepartments(request, response){
         const departments = await Department.findAll({
             include: [{
