@@ -9,10 +9,10 @@ import AuthToken from "../middlewares/authToken.js"
 
 const usersRouter = Router()
 
-usersRouter.get("", AuthToken.isAdmin, listUsersController)
-usersRouter.patch("", AuthToken.hasBasicToken, updateUserController)
-usersRouter.get("/profile", AuthToken.hasBasicToken, getProfile)
-usersRouter.get("/departments/coworkers", AuthToken.hasBasicToken, listUserDepartmentsController)
-usersRouter.get("/departments", AuthToken.hasBasicToken, listCompanyDepartmentsController)
+usersRouter.get("", AuthToken.tokenBasic, AuthToken.isAdmin, listUsersController)
+usersRouter.patch("", AuthToken.tokenBasic, AuthToken.hasBasicToken, updateUserController)
+usersRouter.get("/profile", AuthToken.tokenBasic, AuthToken.hasBasicToken, getProfile)
+usersRouter.get("/departments/coworkers", AuthToken.tokenBasic, AuthToken.hasBasicToken, listUserDepartmentsController)
+usersRouter.get("/departments", AuthToken.tokenBasic, AuthToken.hasBasicToken, listCompanyDepartmentsController)
 
 export default usersRouter
