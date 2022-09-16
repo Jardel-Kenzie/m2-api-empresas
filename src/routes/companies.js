@@ -10,7 +10,7 @@ const companiesRouter = Router()
 
 companiesRouter.get("", listCompaniesController) // correct
 companiesRouter.get("/:sector", listFilteredCompaniesController) // correct
-companiesRouter.post("",AuthToken.isAdmin, AdminController.createCompany ) // correct
+companiesRouter.post("", AuthToken.tokenBasic, AuthToken.isAdmin, AdminController.createCompany ) // correct
 
 
 export default companiesRouter
