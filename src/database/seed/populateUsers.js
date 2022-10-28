@@ -8,7 +8,7 @@ const populateUsers = async () => {
             username: "ADMIN",
             email: "admin@mail.com",
             password: await hash("admin", 8),
-            professional_level: "junior",
+            professional_level: "sênior",
             kind_of_work: "home office",
             is_admin: true
         },
@@ -16,7 +16,7 @@ const populateUsers = async () => {
             username: "Felipe",
             email: "felipe@mail.com",
             password: await hash("1234", 8),
-            professional_level: "junior",
+            professional_level: "júnior",
             kind_of_work: "home office",
             is_admin: false
         },
@@ -24,7 +24,7 @@ const populateUsers = async () => {
             username: "Ruan",
             email: "ruan@mail.com",
             password: await hash("1234", 8),
-            professional_level: "junior",
+            professional_level: "júnior",
             kind_of_work: "home office",
             is_admin: false
         },
@@ -32,7 +32,7 @@ const populateUsers = async () => {
             username: "Jorge",
             email: "jorge@mail.com",
             password: await hash("1234", 8),
-            professional_level: "senior",
+            professional_level: "sênior",
             kind_of_work: "home office",
             is_admin: false
         },
@@ -48,7 +48,7 @@ const populateUsers = async () => {
             username: "Bruna",
             email: "bruna@mail.com",
             password: await hash("1234", 8),
-            professional_level: "senior",
+            professional_level: "sênior",
             kind_of_work: "home office",
             is_admin: false
         },
@@ -56,7 +56,7 @@ const populateUsers = async () => {
             username: "Ricardo",
             email: "ricardo@mail.com",
             password: await hash("1234", 8),
-            professional_level: "estagiario",
+            professional_level: "estágio",
             kind_of_work: "presencial",
             is_admin: false
         },
@@ -64,7 +64,7 @@ const populateUsers = async () => {
             username: "Joana",
             email: "joana@mail.com",
             password: await hash("1234", 8),
-            professional_level: "junior",
+            professional_level: "júnior",
             kind_of_work: "hibrido",
             is_admin: false
         },

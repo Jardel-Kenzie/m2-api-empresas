@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec sucrase-node ./src/app.js",
-    "seed": "node src/database/seed/index.js"
+    "start": "node src/database/index.js",
+    "build": "node src/database/seed/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

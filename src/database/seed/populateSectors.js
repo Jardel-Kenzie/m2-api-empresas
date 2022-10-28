@@ -6,10 +6,10 @@ const populateSectors = async () => {
             description: "Alimenticio",
         },
         {
-            description: "Varejo"
+            description: "Varejo" 
         },
         {
-            description: "Textil"
+            description: "Textil" 
         },
         {
             description: "Manufatura"
@@ -18,10 +18,10 @@ const populateSectors = async () => {
             description: "Aeroespacial"
         },
         {
-            description: "Automotiva"
+            description: "Automotiva" 
         },
         {
-            description: "TI"
+            description: "TI" 
         },
         {
             description: "Atacado"
