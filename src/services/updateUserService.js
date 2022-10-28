@@ -23,9 +23,14 @@ const updateUserService = async (password, email, username, uuid) => {
         })
 
     }
+   
+    const userAfterUpdate = await User.findByPk(uuid, {
+        attributes: {exclude: ["password", "is_admin"]}
+    })
 
 
-    return user
+
+    return userAfterUpdate
 
 }
 

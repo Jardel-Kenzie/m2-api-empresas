@@ -17,7 +17,8 @@ class Company extends Model {
                             msg: "name not empty!"
                         },
                         notNull: {
-                            msg: "name is required!"
+                            msg: "name is required!",
+                            
                         }
                     }
                 },

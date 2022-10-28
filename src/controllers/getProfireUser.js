@@ -13,7 +13,9 @@ export const getProfile = async (request, response) => {
         return decoded.uuid
     })
     
-    const alreadUser = await User.findByPk(uuid)
+    const alreadUser = await User.findByPk(uuid, {
+        attributes: {exclude: ["is_admin", "password"]}
+    })
     
     if(alreadUser){
         return response.status(200).json(alreadUser)

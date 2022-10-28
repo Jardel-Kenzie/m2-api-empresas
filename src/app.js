@@ -24,7 +24,7 @@ app.use(express.json())
 app.use("/auth", Helper.valideBody,authRouter) // Correto
 app.use("/companies", Helper.valideBody, companiesRouter) // Correct
 app.use("/departments", AuthToken.isAdmin, departmentRouter) // correct
-app.use("/sectors", AuthToken.isAdmin,  sectorsRouter)
+app.use("/sectors",  sectorsRouter)
 app.use("/admin", AuthToken.isAdmin, adminRouter)
 app.use("/users", Helper.valideBody, usersRouter)
 

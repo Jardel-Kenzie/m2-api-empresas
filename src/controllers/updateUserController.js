@@ -8,6 +8,19 @@ const { verify } = pkgJwt
 const updateUserController = async (request, response) => {
     const { password="", email="", username="" } = request.body
 
+
+    if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && email){
+        return response.status(400).json("email is invalid")
+    }
+
+    if(username.trim().length === 0 && username){
+        return response.status(400).json("username invalid")
+    }
+
+    if(password.trim().length === 0 && password){
+        return response.status(400).json("password invalid")
+    }
+
     const emailExists = await User.findOne({
         where:{
             email  

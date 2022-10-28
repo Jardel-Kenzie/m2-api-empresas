@@ -18,7 +18,8 @@ class User extends Model {
                     },
                     notNull: {
                         msg: "username is required!"
-                    }
+                    },
+                    
                 }
             },
             email: {

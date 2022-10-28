@@ -23,8 +23,13 @@ export default class CreateUsers{
                 professional_level,
                 kind_of_work
             })
+
+            const user = await User.findByPk(newUser.uuid, {
+                attributes: { exclude: ['is_admin', "password"]}
+            })
+           
         
-            return response.status(201).json(newUser)
+            return response.status(201).json(user)
 
         }catch(errors){
             return response.status(400).json({ error: Helper.organizationErrors(errors)})

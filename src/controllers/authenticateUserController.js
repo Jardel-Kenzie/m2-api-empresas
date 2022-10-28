@@ -39,9 +39,7 @@ export default class AuthenticateUser{
             })
         
             return response.status(200).json({
-                token,
-                is_admin: userAlreadExist.is_admin,
-                uuid: userAlreadExist.uuid
+                token
             })
 
         }catch(errors){
