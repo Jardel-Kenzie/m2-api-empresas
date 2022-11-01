@@ -8,16 +8,18 @@ const updateUserService = async (password, email, username, uuid) => {
 
     const user = await User.findByPk(uuid)
 
+    
     let newPassword = user.password
-        if(password){
-            newPassword = await hash(password, 8)
-        }
-
+    if(password){
+        newPassword = await hash(password, 8)
+    }
+    console.log(newPassword)
+    
     if(user && email){
    
         user.update({
             username: username || user.username,
-            password: await hash(password, 8) || user.password,
+            password: newPassword,
             email: email || user.email
         })
        
