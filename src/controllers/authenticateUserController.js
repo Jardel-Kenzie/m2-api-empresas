@@ -18,7 +18,7 @@ export default class AuthenticateUser{
         })
         
         if(!userAlreadExist){
-            return response.status(404).json({error: `email invalid!`})
+            return response.status(401).json({error: `email invalid!`})
         }
 
         if(!password){

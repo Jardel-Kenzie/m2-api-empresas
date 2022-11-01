@@ -15,11 +15,17 @@ const updateUserService = async (password, email, username, uuid) => {
             password: await hash(password, 8) || user.password,
             email: email || user.email
         })
+       
 
     } else if(user){
+        let newPassword = user.password
+        if(password){
+            newPassword = await hash(password, 8)
+        }
+
         user.update({
             username: username || user.username,
-            password: await hash(password, 8) || user.password,
+            password: newPassword,
         })
 
     }

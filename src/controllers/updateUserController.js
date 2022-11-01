@@ -2,7 +2,9 @@ import {updateUserAdminService, updateUserService} from '../services/updateUserS
 import pkgJwt from 'jsonwebtoken'
 import Helper from '../services/helper.js'
 import User from '../database/models/user.js'
+import pkgBcrypt from 'bcryptjs'
 
+const { decodeBase64 } = pkgBcrypt
 const { verify } = pkgJwt
 
 const updateUserController = async (request, response) => {
