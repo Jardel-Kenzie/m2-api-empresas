@@ -20,8 +20,12 @@
     "sequelize": "^6.21.4",
     "sqlite3": "^5.0.11",
     "sucrase": "^3.25.0",
+    "swagger-ui-express": "^4.6.0",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/swagger-ui-express": "^4.1.3"
   }
 }

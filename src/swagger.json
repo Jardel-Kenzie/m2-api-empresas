@@ -1,0 +1,1352 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Kenzie empresas API",
+    "description": "API para a entrega do projeto frontend do M2",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:6278"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "description": "Rota responsável pela criação de um funcionário",
+        "tags": ["Rotas sem autenticação"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/User" },
+              "examples": {
+                "user": {
+                  "value": {
+                    "username": "kezinho",
+                    "password": "1234",
+                    "email": "kenzinho@mail.com",
+                    "professional_level": "sênior",
+                    "kind_of_work": "remoto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "bad request"
+          },
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserResponse"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "uuid": "5a202da4-f14b-4418-8ffd-a4c7ab3c1145",
+                      "username": "kezinho",
+                      "email": "kenzinho@mail.com",
+                      "professional_level": "sênior",
+                      "kind_of_work": "remoto",
+                      "department_uuid": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "Rota para fazer login na aplicação e obter o token de acesso para as rotas protegidas",
+        "tags": ["Rotas sem autenticação"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "kenzinho@mail.com",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                },
+                "examples": {
+                  "application/json": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjMwNTUxMGYtNDJhNS00OTU5LTlkNTUtN2E1MjhmNGM2Mjk1IiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY3MzM4Mzk3MCwiZXhwIjoxNjc0MjQ3OTcwLCJzdWIiOiJbb2JqZWN0IFVuZGVmaW5lZF0ifQ.JLrR3eG5Ru4t1UEmJW7Idi_MCuWVKnw5sTznzwqAgXE"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/companies": {
+      "get": {
+        "description": "Rota para listar todas as empresas cadastradas",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "uuid": "9b53d868-42ac-4f05-92e6-4ad7c1166c39",
+                        "name": "Skina Lanches",
+                        "opening_hours": "09:00",
+                        "description": "Podrão de qualidade",
+                        "sectors": {
+                          "uuid": "042cd7ac-c6fa-464b-88b3-51a2c3fb2e7c",
+                          "description": "Alimenticio"
+                        }
+                      },
+                      {
+                        "uuid": "5e46b8d2-92fb-42bd-8270-11dc4dd7d52c",
+                        "name": "Gela Guela",
+                        "opening_hours": "09:00",
+                        "description": "Sorvetes barateza",
+                        "sectors": {
+                          "uuid": "042cd7ac-c6fa-464b-88b3-51a2c3fb2e7c",
+                          "description": "Alimenticio"
+                        }
+                      },
+                      {
+                        "uuid": "a0d7ef5d-9eaf-46fd-8f0b-4d0b309f9d9e",
+                        "name": "Mercado Kenzie",
+                        "opening_hours": "09:00",
+                        "description": "Padrão de qualidade",
+                        "sectors": {
+                          "uuid": "f0fe33d7-b78b-47de-859f-f74ee08ced52",
+                          "description": "Varejo"
+                        }
+                      },
+                      {
+                        "uuid": "6a202eb2-4192-403c-84a1-ec5c8c9a8b3e",
+                        "name": "Gortifruti da Terra",
+                        "opening_hours": "09:00",
+                        "description": "Natural e sem agrotóxicos",
+                        "sectors": {
+                          "uuid": "f0fe33d7-b78b-47de-859f-f74ee08ced52",
+                          "description": "Varejo"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      },
+      "post": {
+        "description": "Rota responsável por cadastrar empresas no sistema",
+        "tags": ["Token de Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              },
+              "examples": {
+                "company": {
+                  "value": {
+                    "name": "Kenzie",
+                    "opening_hours": "09:00",
+                    "description": "Kenzie kenzie kenzie",
+                    "sector_uuid": "f270491c-35e2-4084-9a3d-47c2c3caba95"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/CompanyResponse"
+                },
+                "examples": {
+                  "company": {
+                    "value": {
+                      "uuid": "ee1d8e1f-c73a-4d93-9abb-6e5682cd9b4a",
+                      "name": "Kenzie",
+                      "opening_hours": "09:00",
+                      "description": "Kenzie kenzie kenzie",
+                      "sector_uuid": "f270491c-35e2-4084-9a3d-47c2c3caba95"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{sector_name}": {
+      "get": {
+        "description": "Rota responsável por listar todas as empresas do setor informado pela URL",
+        "tags": ["Rotas sem autenticação"],
+        "parameters": [
+          {
+            "name": "Nome do setor",
+            "description": "Exemplo: Alimenticio"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "uuid": "9b53d868-42ac-4f05-92e6-4ad7c1166c39",
+                        "name": "Skina Lanches",
+                        "opening_hours": "09:00",
+                        "description": "Podrão de qualidade",
+                        "sectors": {
+                          "uuid": "042cd7ac-c6fa-464b-88b3-51a2c3fb2e7c",
+                          "description": "Alimenticio"
+                        }
+                      },
+                      {
+                        "uuid": "5e46b8d2-92fb-42bd-8270-11dc4dd7d52c",
+                        "name": "Gela Guela",
+                        "opening_hours": "09:00",
+                        "description": "Sorvetes barateza",
+                        "sectors": {
+                          "uuid": "042cd7ac-c6fa-464b-88b3-51a2c3fb2e7c",
+                          "description": "Alimenticio"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/sectors": {
+      "get": {
+        "description": "Rota responsável por listar todos os setores cadastrados no sistema",
+        "tags": ["Rotas sem autenticação"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "uuid": "042cd7ac-c6fa-464b-88b3-51a2c3fb2e7c",
+                        "description": "Alimenticio"
+                      },
+                      {
+                        "uuid": "f0fe33d7-b78b-47de-859f-f74ee08ced52",
+                        "description": "Varejo"
+                      },
+                      {
+                        "uuid": "2fb07a07-c9f5-4427-b4e0-2330add177a9",
+                        "description": "Textil"
+                      },
+                      {
+                        "uuid": "9b41ddcf-a4bd-4f48-a6c5-32f2abb3b3dc",
+                        "description": "Manufatura"
+                      },
+                      {
+                        "uuid": "62de3b6f-bba4-4bc5-af6e-fb30b4356bf3",
+                        "description": "Aeroespacial"
+                      },
+                      {
+                        "uuid": "980fc603-8915-41e0-9240-0c8c3b024c3d",
+                        "description": "Automotiva"
+                      },
+                      {
+                        "uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1",
+                        "description": "TI"
+                      },
+                      {
+                        "uuid": "f38dad57-0f16-4bd5-86e5-c3a7706df623",
+                        "description": "Atacado"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{}]
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "description": "Rota responsável para listar as informações do usuário logado",
+        "tags": ["Funcionários"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "uuid": "5a202da4-f14b-4418-8ffd-a4c7ab3c1145",
+                      "username": "kezinho",
+                      "email": "kenzinho@mail.com",
+                      "professional_level": "sênior",
+                      "kind_of_work": null,
+                      "department_uuid": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/departments/coworkers": {
+      "get": {
+        "description": "Rota para listar todos os funcionários de um mesmo departamento",
+        "tags": ["Funcionários"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "application/json": {
+                    "value": [
+                      {
+                        "uuid": "c5122851-0200-4655-a153-d818cb159b27",
+                        "name": "TI",
+                        "description": "Departamento de TI",
+                        "company_uuid": "3f5a0c5e-a200-4df8-b06e-bc542531f8f6",
+                        "users": [
+                          {
+                            "uuid": "9ceae0ab-8ab0-4db3-b100-4570b3aab0ec",
+                            "username": "kezinho",
+                            "email": "kenzinho@mail.com",
+                            "password": "$2a$08$.Cq3FFoJQFFbz3UHN41/iuMHz5Tt6Ia6XBZgP2jP8OkoJyglXz0B6",
+                            "professional_level": "pleno",
+                            "kind_of_work": "home office",
+                            "is_admin": false,
+                            "department_uuid": "c5122851-0200-4655-a153-d818cb159b27"
+                          },
+                          {
+                            "uuid": "f675c454-31eb-4280-9975-7dde7f3f4f4d",
+                            "username": "Bertoldo",
+                            "email": "bertoldo@mail.com",
+                            "password": "$2a$08$cR2ootr6D1I08sCm5zMAo.IvFYiRiz/yLI1qb65pFb31CmZyRjFDS",
+                            "professional_level": "sênior",
+                            "kind_of_work": "home office",
+                            "is_admin": false,
+                            "department_uuid": "c5122851-0200-4655-a153-d818cb159b27"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/departments": {
+      "get": {
+        "description": "Rota responsável por listar todos os departamentos da empresa que o usuário logado é funcionário",
+        "tags": ["Funcionários"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+                      "name": "Nerd lab",
+                      "opening_hours": "09:00",
+                      "description": "Criamos um site rapidão pra você",
+                      "sector_uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1",
+                      "departments": [
+                        {
+                          "uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5",
+                          "name": "TI",
+                          "description": "Departamento de TI",
+                          "company_uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8"
+                        },
+                        {
+                          "uuid": "f34fb160-9ed4-456a-bebd-2209d3e49c3d",
+                          "name": "RH",
+                          "description": "Recrutamento e seleção",
+                          "company_uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "Rota responsável por listar todos os funcionários cadastrados",
+        "tags": ["Token de Admin"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "users": {
+                    "value": [
+                      {
+                        "uuid": "8da2c187-19fa-4835-8217-e292908ac30b",
+                        "username": "ADMIN",
+                        "email": "admin@mail.com",
+                        "password": "$2a$08$1Cv4zo1vWTNQhNnCNsF4tuHKtVBdR5.zLm5kf0gANbO9rJiNdATcm",
+                        "professional_level": "sênior",
+                        "kind_of_work": "home office",
+                        "is_admin": true,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "3485f5be-ea48-4beb-b5c9-cc2eb39c63bb",
+                        "username": "Felipe",
+                        "email": "felipe@mail.com",
+                        "password": "$2a$08$HOxlY6BSmlwZuXA67fok2.PFpvmqiPNQG8VA0K7WatJEHK0G6aAku",
+                        "professional_level": "júnior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "3b7cb1f1-d237-4e20-a6b2-ddb869fe2a41",
+                        "username": "Ruan",
+                        "email": "ruan@mail.com",
+                        "password": "$2a$08$DrlnFWLakU/BxdQc9Q4JvOURnw6XlbN5r9h4FVIRRQC8qT7HoNS9S",
+                        "professional_level": "júnior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "00d2d1dc-25c2-482a-bd72-941ff190132c",
+                        "username": "Jorge",
+                        "email": "jorge@mail.com",
+                        "password": "$2a$08$VB5V5WQZXPjGMd1Fdrq5I.FdBFsTZxcLwDqZIR2ibDuP3mBjd0MeC",
+                        "professional_level": "sênior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "d27dc753-8336-4c23-91ae-d929f6f3c47e",
+                        "username": "João",
+                        "email": "joao@mail.com",
+                        "password": "$2a$08$JV6DPjulwPCF3NI0sRfTX.lkEcbqv3eyDIAYHLVri4PvOGQ1LP6GG",
+                        "professional_level": "pleno",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "3404c6d5-89b1-4f5e-9cd0-e089e19067f7",
+                        "username": "Bruna",
+                        "email": "bruna@mail.com",
+                        "password": "$2a$08$4xZVtYsyl0yB49jLwPro2OjK773EHNyX9ssZw083hZEzvvMTUeal.",
+                        "professional_level": "sênior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "25f8cd41-3fbd-4aae-ac14-e2f3dd853dc8",
+                        "username": "Ricardo",
+                        "email": "ricardo@mail.com",
+                        "password": "$2a$08$zSCdZRoQiEw.uKNIrvnyS.EdEnr84bGE0iMldfWzsMfVBtHbZYwcW",
+                        "professional_level": "estágio",
+                        "kind_of_work": "presencial",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "b19da21e-3826-4549-b3f5-c61f32bc9849",
+                        "username": "Joana",
+                        "email": "joana@mail.com",
+                        "password": "$2a$08$ToUZMjYpK6kWPOW8TVRqDe8eDTGVRlXVULp3uPrQ7ZHaWYV9EqhfK",
+                        "professional_level": "júnior",
+                        "kind_of_work": "hibrido",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "5a202da4-f14b-4418-8ffd-a4c7ab3c1145",
+                        "username": "Kenzinho M2",
+                        "email": "kenzinhoM2@mail.com",
+                        "password": "$2a$08$yx5vzr3JEu0N5NzKONTYFu1AQ1mqVeEUcUE5L1LlimFZ7NSQW5/ca",
+                        "professional_level": "sênior",
+                        "kind_of_work": null,
+                        "is_admin": false,
+                        "department_uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Rota responsável por atualizar as informações do usuário logado",
+        "tags": ["Funcionários"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdate"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "username": "Kenzinho M2",
+                    "password": "123456",
+                    "email": "kenzinhoM2@mail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UserResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "uuid": "5a202da4-f14b-4418-8ffd-a4c7ab3c1145",
+                      "username": "Kenzinho M2",
+                      "email": "kenzinhoM2@mail.com",
+                      "professional_level": "sênior",
+                      "kind_of_work": null,
+                      "department_uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "description": "Rota responsável por listar todos os departamentos cadastrados",
+        "tags": ["Token de Admin"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "departments": {
+                    "value": [
+                      {
+                        "uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5",
+                        "name": "TI",
+                        "description": "Departamento de TI",
+                        "companies": {
+                          "uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+                          "name": "Nerd lab",
+                          "opening_hours": "09:00",
+                          "description": "Criamos um site rapidão pra você",
+                          "sector_uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1"
+                        }
+                      },
+                      {
+                        "uuid": "f34fb160-9ed4-456a-bebd-2209d3e49c3d",
+                        "name": "RH",
+                        "description": "Recrutamento e seleção",
+                        "companies": {
+                          "uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+                          "name": "Nerd lab",
+                          "opening_hours": "09:00",
+                          "description": "Criamos um site rapidão pra você",
+                          "sector_uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Rota responsável por cadastrar um novo departamento",
+        "tags": ["Token de Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepartment"
+              },
+              "examples": {
+                "department": {
+                  "value": {
+                    "name": "Ensino",
+                    "description": "Equipe responsável para ensinar os alunos",
+                    "company_uuid": "85b7393b-ad59-4550-964b-0aaf796243f1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentResponse"
+                },
+                "examples": {
+                  "department": {
+                    "value": {
+                      "uuid": "f4df9ca2-5d66-46e6-8480-2f2e7d7f949a",
+                      "name": "Ensino",
+                      "description": "Equipe responsável para ensinar os alunos",
+                      "company_uuid": "85b7393b-ad59-4550-964b-0aaf796243f1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments/{company_id}": {
+      "get": {
+        "description": "Rota responsável por listar todos os departamentos de uma empresa, o ID da empresa deve ser informado na URL da requisição",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID DA EMPRESA",
+            "description": "Exemplo: b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "company_departments": {
+                    "value": [
+                      {
+                        "uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5",
+                        "name": "TI",
+                        "description": "Departamento de TI",
+                        "companies": {
+                          "uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+                          "name": "Nerd lab",
+                          "opening_hours": "09:00",
+                          "description": "Criamos um site rapidão pra você",
+                          "sector_uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1"
+                        }
+                      },
+                      {
+                        "uuid": "f34fb160-9ed4-456a-bebd-2209d3e49c3d",
+                        "name": "RH",
+                        "description": "Recrutamento e seleção",
+                        "companies": {
+                          "uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8",
+                          "name": "Nerd lab",
+                          "opening_hours": "09:00",
+                          "description": "Criamos um site rapidão pra você",
+                          "sector_uuid": "3854e74a-0a96-43dd-b44b-f884c08ff3a1"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments/hire/": {
+      "patch": {
+        "description": "Rota responsável por contratar um funcionário para um departamento",
+        "tags": ["Token de Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Hire"
+              },
+              "examples": {
+                "hire": {
+                  "value": {
+                    "user_uuid": "18c1e797-420e-414c-a521-a78c71e4d4d5",
+                    "department_uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/HireResponse"
+                },
+                "examples": {
+                  "hire": {
+                    "value": {
+                      "uuid": "18c1e797-420e-414c-a521-a78c71e4d4d5",
+                      "username": "kezinho",
+                      "email": "kenzinho@mail.com",
+                      "password": "$2a$08$o2pOU4NcvGQcMUQ8SWJI..pSBCWkh9fDYH4mJXm9iBcrTY1VKeDK6",
+                      "professional_level": "sênior",
+                      "kind_of_work": null,
+                      "is_admin": false,
+                      "department_uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments/dismiss/{user_id}": {
+      "patch": {
+        "description": "Rota responsável por demitir um funcionário de um departamento",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID do funcionário",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HireResponse"
+                },
+                "examples": {
+                  "dismiss": {
+                    "value": {
+                      "uuid": "18c1e797-420e-414c-a521-a78c71e4d4d5",
+                      "username": "kezinho",
+                      "email": "kenzinho@mail.com",
+                      "password": "$2a$08$o2pOU4NcvGQcMUQ8SWJI..pSBCWkh9fDYH4mJXm9iBcrTY1VKeDK6",
+                      "professional_level": "sênior",
+                      "kind_of_work": null,
+                      "is_admin": false,
+                      "department_uuid": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments/{department_id}": {
+      "patch": {
+        "description": "Rota responsável por atualizar a descrição de um departamento",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID do departamento",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/DepartmentUpdate"
+              },
+              "examples": {
+                "department": {
+                  "value": {
+                    "description": "Novo departamento de TI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/DepartmentResponse"
+                },
+                "examples": {
+                  "department": {
+                    "value": {
+                      "uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5",
+                      "name": "TI",
+                      "description": "Novo departamento de TI",
+                      "company_uuid": "b11aae6d-3f9d-4b9b-a119-6a62e9a494f8"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Rota responsável por deletar um departamento",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID do departamento",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/admin/out_of_work": {
+      "get": {
+        "description": "Rota responsável por listar todos os funcionários que ainda não foram contratados para nenhum departamento",
+        "tags": ["Token de Admin"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                },
+                "examples": {
+                  "users": {
+                    "value": [
+                      {
+                        "uuid": "3485f5be-ea48-4beb-b5c9-cc2eb39c63bb",
+                        "username": "Felipe",
+                        "email": "felipe@mail.com",
+                        "professional_level": "júnior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "3b7cb1f1-d237-4e20-a6b2-ddb869fe2a41",
+                        "username": "Ruan",
+                        "email": "ruan@mail.com",
+                        "professional_level": "júnior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "00d2d1dc-25c2-482a-bd72-941ff190132c",
+                        "username": "Jorge",
+                        "email": "jorge@mail.com",
+                        "professional_level": "sênior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "d27dc753-8336-4c23-91ae-d929f6f3c47e",
+                        "username": "João",
+                        "email": "joao@mail.com",
+                        "professional_level": "pleno",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "3404c6d5-89b1-4f5e-9cd0-e089e19067f7",
+                        "username": "Bruna",
+                        "email": "bruna@mail.com",
+                        "professional_level": "sênior",
+                        "kind_of_work": "home office",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "25f8cd41-3fbd-4aae-ac14-e2f3dd853dc8",
+                        "username": "Ricardo",
+                        "email": "ricardo@mail.com",
+                        "professional_level": "estágio",
+                        "kind_of_work": "presencial",
+                        "is_admin": false,
+                        "department_uuid": null
+                      },
+                      {
+                        "uuid": "b19da21e-3826-4549-b3f5-c61f32bc9849",
+                        "username": "Joana",
+                        "email": "joana@mail.com",
+                        "professional_level": "júnior",
+                        "kind_of_work": "hibrido",
+                        "is_admin": false,
+                        "department_uuid": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/update_user/{user_id}": {
+      "patch": {
+        "description": "Rota responsável por atualizar as informações de um funcionário",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID do funcionário",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/UserUpdateAdmin"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "kind_of_work": "presencial",
+                    "professional_level": "pleno"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseAdmin"
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "uuid": "5a202da4-f14b-4418-8ffd-a4c7ab3c1145",
+                      "username": "Kenzinho M2",
+                      "email": "kenzinhoM2@mail.com",
+                      "password": "$2a$08$yx5vzr3JEu0N5NzKONTYFu1AQ1mqVeEUcUE5L1LlimFZ7NSQW5/ca",
+                      "professional_level": "pleno",
+                      "kind_of_work": "presencial",
+                      "is_admin": false,
+                      "department_uuid": "e66f05d9-6093-4e32-9f70-4bcc213e53a5"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/delete_user/{user_id}": {
+      "delete": {
+        "description": "Rota responsável por deletar um usuário",
+        "tags": ["Token de Admin"],
+        "parameters": [
+          {
+            "name": "UUID do funcionário",
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/auth/validate_user": {
+      "get": {
+        "description": "Rota responsável por obter o tipo de usuário logado",
+        "tags": ["Todos os Usuários com Token"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "type_of_user": {
+                    "value": {
+                      "is_admin": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "professional_level": {
+            "type": "string",
+            "description": "Valor opcional"
+          },
+          "kind_of_work": {
+            "type": "string",
+            "description": "Valor opcional"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "professional_level": {
+            "type": "string",
+            "description": "Valor opcional"
+          },
+          "kind_of_work": {
+            "type": "string",
+            "description": "Valor opcional"
+          },
+          "department_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserUpdateAdmin": {
+        "type": "object",
+        "properties": {
+          "kind_of_work": {
+            "type": "string"
+          },
+          "professional_level": {
+            "type": "string"
+          }
+        }
+      },
+      "UserResponseAdmin": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "professional_level": {
+            "type": "string",
+            "description": "Valor opcional"
+          },
+          "kind_of_work": {
+            "type": "string",
+            "description": "Valor opcional"
+          },
+          "is_admin": {
+            "type": "boolean"
+          },
+          "department_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCompany": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "opening_hour": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sector_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "CompanyResponse": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "opening_hour": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sector_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDepartment": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "company_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "DepartmentResponse": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "company_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "DepartmentUpdate": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Hire": {
+        "type": "object",
+        "properties": {
+          "user_uuid": {
+            "type": "string"
+          },
+          "department_uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "HireResponse": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "user_uuid": {
+            "type": "string"
+          },
+          "department_uuid": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "JWT": []
+    }
+  ]
+}

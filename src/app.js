@@ -13,6 +13,9 @@ import sectorsRouter from "./routes/sectors.js"
 
 import Helper from "./services/helper.js"
 
+import swaggerUiExpress from 'swagger-ui-express'
+import swaggerDocument from './swagger.json' assert {type: "json"}
+
 
 const app = express()
 
@@ -41,6 +44,12 @@ app.use((error, request, response, next) => {
         error:  error.msg,  
     })
 })
+
+app.use(
+    '/api-documentation',
+    swaggerUiExpress.serve,
+    swaggerUiExpress.setup(swaggerDocument)    
+)
 
 app.listen(6278, () => {
     console.log("App is running http://localhost:6278/ 🚀 ")
